@@ -2,10 +2,12 @@ import React from 'react'
 import * as Icon from '@ant-design/icons';
 import {GithubOutlined} from '@ant-design/icons'
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import MenuConfig from '../../config'
+
 const { Header, Content, Footer, Sider } = Layout;
 
 // 获取路由配置，来源后端接口返回
-import MenuConfig from '../../config'
+
 const iconnameToElement = ((iconname) => React.createElement(Icon[iconname]))
 const items = MenuConfig.map((item) => {
   // 没有子菜单
@@ -48,13 +50,14 @@ const items = MenuConfig.map((item) => {
 //   getItem('Files', '9', <FileOutlined />),
 // ];
 
-export default function CommonSider() {
+export default function CommonSider({collapsed}) {
+  console.log('CommonSider中collapsed状态', collapsed)
   return (
     <div>
       {/* <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}> */}
-      <Sider style={{minHeight: '100%'}}>
+      <Sider style={{minHeight: '100%'}} collapsed={collapsed}>
         <div className="demo-logo-vertical" />
-        <h3 style={{ color: 'white', textAlign: 'center' }}><GithubOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;React-admin</h3>
+        <h3 style={{ color: 'white', textAlign: 'center' }}><GithubOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!collapsed ? 'React-admin' : ''}</h3>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
     </div>

@@ -77,4 +77,43 @@ const items = MenuConfig.map((item) => {
 因为获取const变量也需要{}
 
 ## 三、redux store reducers
+如何安装
+```
 npm install @reduxjs/toolkit react-redux
+```
+```
+import { useDispatch } from 'react-redux';
+import {collapseMenu} from '../../store/reducers/tab'
+
+  // 创建dispatch
+  const dispatch = useDispatch()
+  // 点击展开收起按钮回调
+  const setCollapsed = () => {
+    console.log('CommonHeader中点击按钮后',collapsed)
+    dispatch(collapseMenu())
+  }
+```
+  这里为什么要多余创建一个dispatch
+
+
+  (0 , _store_reducers_tab__WEBPACK_IMPORTED_MODULE_2__.collapseMenu) is not a function TypeError: (0 , _store_reducers_tab__WEBPACK_IMPORTED_MODULE_2__.collapseMenu) is not a function
+
+  这里需要把reducer/tab.js中reducer改为reducers
+  ```
+  import { createSlice } from "@reduxjs/toolkit";
+
+const tabSlice = createSlice({
+    name: 'tab',
+    initialState: {
+        isCollapse: false
+    },
+    reducers: {
+        collapseMenu: state => {
+            state.isCollapse = !state.isCollapse
+        }
+    }
+})
+
+export const {collapseMenu} = tabSlice.actions
+export default tabSlice.reducer
+  ```
