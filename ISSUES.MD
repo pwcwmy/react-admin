@@ -1,0 +1,3 @@
+1. export 'createRoot' (imported as 'ReactDOM') was not found in 'react-dom' (possible exports: __DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, createPortal, flushSync, preconnect, prefetchDNS, preinit, preinitModule, preload, preloadModule, requestFormReset, unstable_batchedUpdates, useFormState, useFormStatus, version)
+问题：antd 与 react版本不匹配
+解决办法：降低antd版本：yarn add antd @5.0（5.22.7降低到5.0版本）

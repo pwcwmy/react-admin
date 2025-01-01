@@ -1,6 +1,3 @@
-## 一、动态配置路由
-配置文件如下
-```
 export default  [
     {
         path: '/home',
@@ -43,38 +40,3 @@ export default  [
         ]
     }
 ]
-```
-
-获取路由配置，来源后端接口返回
-```
-import MenuConfig from '../../config'
-const iconnameToElement = ((iconname) => React.createElement(Icon[iconname]))
-const items = MenuConfig.map((item) => {
-  // 没有子菜单
-  const child = {
-    key: item.key,
-    label: item.label,
-    icon: iconnameToElement(item.icon)
-  }
-  // 有子菜单就在chidren属性内部 map return
-  if (item.children) {
-    child.children = item.children.map((item) => {
-      return {
-        key: item.key,
-        label: item.label
-      }
-    })
-  }
-  // 合并return child
-  return child
-})
-```
-
-
-## 下拉菜单
-<Dropdown menu={{items}}> 
-这里注意是{{}}
-因为获取const变量也需要{}
-
-## 三、redux store reducers
-npm install @reduxjs/toolkit react-redux
