@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Main from '../pages/main'
 import Home from "../pages/Home";
 import Mall from "../pages/Mall";
@@ -11,6 +11,10 @@ const routes = [
         path: '/',
         element: <Main/>,
         children: [
+            {
+                path: '/',
+                element: <Navigate to='home' replace />
+            },
             {
                 path: 'home',
                 element: <Home/>

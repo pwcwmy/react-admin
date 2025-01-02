@@ -1,18 +1,19 @@
 import React from 'react'
 import * as Icon from '@ant-design/icons';
-import {GithubOutlined} from '@ant-design/icons'
+import { GithubOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd';
+// 获取路由配置，来源后端接口返回
 import MenuConfig from '../../config'
+import { useNavigate } from 'react-router-dom';
 
 const { Sider } = Layout;
 
-// 获取路由配置，来源后端接口返回
 
 const iconnameToElement = ((iconname) => React.createElement(Icon[iconname]))
 const items = MenuConfig.map((item) => {
   // 没有子菜单
   const child = {
-    key: item.key,
+    key: item.path, // 在config文件中没有key, 只有path
     label: item.label,
     icon: iconnameToElement(item.icon)
   }
@@ -20,7 +21,7 @@ const items = MenuConfig.map((item) => {
   if (item.children) {
     child.children = item.children.map((item) => {
       return {
-        key: item.key,
+        key: item.path, // 在config文件中没有key, 只有path
         label: item.label
       }
     })
@@ -50,15 +51,24 @@ const items = MenuConfig.map((item) => {
 //   getItem('Files', '9', <FileOutlined />),
 // ];
 
-export default function CommonSider({collapsed}) {
+export default function CommonSider({ collapsed }) {
   console.log('CommonSider中collapsed状态', collapsed)
+
+  const navigate = useNavigate()
+
+  // 点击菜单
+  const selectMenu = (e) => {
+    console.log('点击路由菜单等到e', e)
+    navigate(e.key)
+  }
+
   return (
     <div>
       {/* <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}> */}
-      <Sider style={{minHeight: '100%'}} collapsed={collapsed}>
+      <Sider style={{ minHeight: '100%' }} collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <h3 style={{ color: 'white', textAlign: 'center' }}><GithubOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!collapsed ? 'React-admin' : ''}</h3>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" mode="inline" items={items} onClick={selectMenu} />
       </Sider>
     </div>
   )
