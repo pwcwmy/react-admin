@@ -28,3 +28,50 @@
     color: #666666;
     margin-left: 60px;
 }
+
+.home .num {
+    display: flex;
+    /* 超出宽度后能够换行 */
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.home .num .ant-card {
+    width: 33%
+}
+
+.home .num .ant-card-body {
+    display: flex;
+    padding: 10px 25px
+}
+
+.home .num .icon-box {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    line-height: 85px;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.home .anticon {
+    font-size: 30px;
+}
+.home .num .detail {
+    margin-left: 15px;
+}
+/* 价格 */
+.home .num .detail .value {
+    font-size: 30px;
+    margin-top: 8px;
+    margin-bottom: -15px
+}
+
+/* 价格名称 */
+.home .num .detail .name {
+    font-size: 14px;
+    text-align: center;
+    color: #999999;
+}
+

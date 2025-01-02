@@ -127,3 +127,28 @@ Mock.mock()
 rurl
 rtype
 template
+
+## 自适应 栅格 flex
+
+## Echarts
+```
+      // 组装MyEcharts组件所需数据
+      // x轴数据
+      const xData = orderData.date
+      // series数据
+      const keyArray = Object.keys(orderData.data[0])
+      const series = []
+      keyArray.forEach(key => {
+        series.push({
+          name: key,
+          data: orderData.data.map(item => item[key]),
+          type: 'line' // 折线图
+        })
+      })
+      setEchartData({
+        order: {
+          xData: xData,
+          series: series
+        }
+      })
+```
