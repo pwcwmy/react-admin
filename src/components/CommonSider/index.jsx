@@ -1,10 +1,10 @@
 import React from 'react'
 import * as Icon from '@ant-design/icons';
 import {GithubOutlined} from '@ant-design/icons'
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout, Menu } from 'antd';
 import MenuConfig from '../../config'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 
 // 获取路由配置，来源后端接口返回
 

@@ -1,11 +1,9 @@
 import React from 'react'
-import { Layout , theme, Breadcrumb} from 'antd';
+import { Layout , Breadcrumb} from 'antd';
+import { Outlet } from 'react-router'
 const { Content } = Layout;
 
 export default function CommonContent() {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   return (
     <div>
       <Content
@@ -21,16 +19,8 @@ export default function CommonContent() {
           <Breadcrumb.Item>User</Breadcrumb.Item>
           <Breadcrumb.Item>Bill</Breadcrumb.Item>
         </Breadcrumb>
-        <div
-          style={{
-            padding: 24,
-            minHeight: 360,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          Bill is a cat.
-        </div>
+        {/* Home等页面入口 */}
+        <Outlet/>
       </Content>
     </div>
   )
