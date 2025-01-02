@@ -80,7 +80,7 @@ export default function Home() {
   useEffect(() => {
     getData().then((res) => {
       console.log('homeApi res data', res.data)
-      const { tableData, orderData } = res.data.data
+      const { tableData, orderData, userData, videoData } = res.data.data
       setTableData(tableData)
 
       // 组装MyEcharts组件所需数据
@@ -97,9 +97,33 @@ export default function Home() {
         })
       })
       setEchartData({
+        // 折线图
         order: {
           xData: xData,
           series: series
+        },
+        // 柱状图
+        user: {
+          xData: userData.map(item => item.date),
+          series: [
+            {
+              name: '新增用户',
+              data: userData.map(item => item.new),
+              type: 'bar'
+            },
+            {
+              name: '活跃用户',
+              data: userData.map(item => item.active),
+              type: 'bar'
+            }
+          ]
+        },
+        // 饼图
+        video: {
+          series: {
+            data: videoData,
+            type: 'pie'
+          }
         }
       })
     })
@@ -174,8 +198,12 @@ export default function Home() {
         </div>
 
         {/* <div id="main" style={{height: '300px'}}></div> */}
-        {/* 短路操作 */}
-        { echartData.order && <MyEcharts chartData={echartData.order} style={{ height: '280px' }} isAxisChart={ true }/>}
+        {/* 短路操作 订单折线图*/}
+        {echartData.order && <MyEcharts chartData={echartData.order} style={{ height: '280px' }} isAxisChart={true} />}
+        <div className='graph'>
+          {echartData.user && <MyEcharts chartData={echartData.user} style={{ height: '240px', width: '50%' }} isAxisChart={true} />}
+          {echartData.video && <MyEcharts chartData={echartData.video} style={{ height: '260px', width: '50%' }} isAxisChart={false} />}
+        </div>
       </Col>
     </Row>
   )

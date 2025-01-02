@@ -132,7 +132,7 @@ template
 
 ## Echarts
 ```
-      // 组装MyEcharts组件所需数据
+// 组装MyEcharts组件所需数据
       // x轴数据
       const xData = orderData.date
       // series数据
@@ -146,9 +146,33 @@ template
         })
       })
       setEchartData({
+        // 折线图
         order: {
           xData: xData,
           series: series
+        },
+        // 柱状图
+        user: {
+          xData: userData.map(item => item.date),
+          series: [
+            {
+              name: '新增用户',
+              data: userData.map(item => item.new),
+              type: 'bar'
+            },
+            {
+              name: '活跃用户',
+              data: userData.map(item => item.active),
+              type: 'bar'
+            }
+          ]
+        },
+        // 饼图
+        video: {
+          series: {
+            data: videoData,
+            type: 'pie'
+          }
         }
       })
 ```
