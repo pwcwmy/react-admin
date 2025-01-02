@@ -117,3 +117,13 @@ const tabSlice = createSlice({
 export const {collapseMenu} = tabSlice.actions
 export default tabSlice.reducer
   ```
+
+## 四、axios二次封装
+https://axios-http.com/docs/interceptors
+
+## Mock.js
+Mock.mock()
+3个参数
+rurl
+rtype
+template

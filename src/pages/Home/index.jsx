@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Col, Row, Card } from 'antd'
 import './index.css'
+import {getData} from '../../api'
 export default function Home() {
+  useEffect(() => {
+    getData().then((res) => {
+      console.log('homeApi res', res)
+    })
+  }, [])// []表示加载一次
   const userImg = require('../../assets/images/user.png')
   return (
     <Row className='home'>
