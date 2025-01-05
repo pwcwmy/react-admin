@@ -176,3 +176,63 @@ template
         }
       })
 ```
+const [tableData, setTableData] = useState([]) // 如果这里不初始化为数组, table的datasource 会报错rawData.some is not a function
+![alt text](image.png)
+
+
+          <Form.Item
+            label="年龄"
+            name='age'
+            rules={[
+                // 细节：这里必须用列表[]包裹rules
+              {
+                require: true,
+                message: '请输入年龄'
+              },
+              {
+                type: 'number',
+                message: '年龄必须为数字'
+              }
+            ]}
+          >
+            <InputNumber placeholder='请输入年龄'></InputNumber>
+          </Form.Item>
+
+const form = Form.useForm()  报错Cannot set properties of undefined (setting 'name')
+在 React 中，const [form] = Form.useForm() 这一行代码使用了数组解构赋值的语法特性。这里的 [] 并不是直接与 Form.useForm() 函数调用相关联，而是用于从 Form.useForm() 返回的结果中提取特定值的一种方式。具体来说，Form.useForm() 方法返回的是一个数组，这个数组的第一个元素是一个 FormInstance 对象，它提供了许多用于操作表单的方法和属性5。
+
+## dayjs 日期转换
+
+
+数据回填
+```
+const handleClick = (type, rowData) => {
+    setIsModalOpen(!isModalOpen)
+    console.log('rowData', rowData)
+    if (type === 'add') {
+      setModalType(0) // 新增
+    } else {
+      setModalType(1) // 编辑
+      // 数据回显
+      // 深拷贝
+      const cloneData = JSON.parse(JSON.stringify(rowData))
+      cloneData.birth = dayjs(cloneData.birth)
+      form.setFieldsValue(cloneData) // key和name一定要对应, 区分于setFieldValue
+    }
+  }
+
+
+
+删除按钮带一个确认弹窗
+```
+<Popconfirm
+  title='提示'
+  description='此操作将删除该用户,是否继续?'
+  okText='确认'
+  cancelText='取消'
+  onConfirm={() => handleDelete(rowData)}
+// onCancel={}
+>
+  <Button type="primary" danger>删除</Button>
+</Popconfirm>
+```
