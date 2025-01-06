@@ -4,7 +4,9 @@ import CommonSider from '../components/CommonSider';
 import CommonHeader from '../components/CommonHeader';
 import CommonContent from '../components/CommonContent';
 import CommonFooter from '../components/CommonFooter';
+import CommonTag from '../components/CommonTag';
 import { useSelector } from 'react-redux';
+
 
 export default function Main() {
   // const [collapsed, setCollapsed] = useState(false);
@@ -16,6 +18,7 @@ export default function Main() {
         <CommonSider collapsed={collapsed}/>
         <Layout>
           <CommonHeader collapsed={collapsed}/>
+          <CommonTag />
           <CommonContent />
           <CommonFooter />
         </Layout>

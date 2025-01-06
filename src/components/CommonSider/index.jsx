@@ -5,7 +5,8 @@ import { Layout, Menu } from 'antd';
 // 获取路由配置，来源后端接口返回
 import MenuConfig from '../../config'
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { selectMenuList } from '../../store/reducers/tab'
 const { Sider } = Layout;
 
 
@@ -56,9 +57,34 @@ export default function CommonSider({ collapsed }) {
 
   const navigate = useNavigate()
 
+  const dispatch = useDispatch()
+  // 添加数据到store
+  const setTabList = (val) => {
+    dispatch(selectMenuList(val))
+  }
+  
   // 点击菜单
   const selectMenu = (e) => {
     console.log('点击路由菜单等到e', e)
+    // 根据e.key即path去找label，从而切换tab
+    let data
+    MenuConfig.forEach(item => {
+      if (item.path === e.keyPath[e.keyPath.length - 1]) {
+        data = item
+        // 如果有子菜单
+        if (e.keyPath.length > 1) {
+          item.children.find(child => {
+            return child.path === e.key
+          })
+        }
+      }
+    })
+    
+    setTabList({
+      path: data.path,
+      name: data.name, 
+      label: data.label
+    })
     navigate(e.key)
   }
 
