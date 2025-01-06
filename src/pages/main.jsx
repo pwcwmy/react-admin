@@ -6,6 +6,7 @@ import CommonContent from '../components/CommonContent';
 import CommonFooter from '../components/CommonFooter';
 import CommonTag from '../components/CommonTag';
 import { useSelector } from 'react-redux';
+import RouterAuth from '../router/RouterAuth';
 
 
 export default function Main() {
@@ -14,15 +15,17 @@ export default function Main() {
   const collapsed = useSelector(state => state.tab.isCollapse)
   return (
     <div>
-      <Layout style={{ minHeight: '100vh' }} >
-        <CommonSider collapsed={collapsed}/>
-        <Layout>
-          <CommonHeader collapsed={collapsed}/>
-          <CommonTag />
-          <CommonContent />
-          <CommonFooter />
+      <RouterAuth>
+        <Layout style={{ minHeight: '100vh' }} >
+          <CommonSider collapsed={collapsed} />
+          <Layout>
+            <CommonHeader collapsed={collapsed} />
+            <CommonTag />
+            <CommonContent />
+            <CommonFooter />
+          </Layout>
         </Layout>
-      </Layout>
+      </RouterAuth>
     </div>
   );
 }
